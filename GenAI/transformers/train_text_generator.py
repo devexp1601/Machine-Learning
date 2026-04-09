@@ -10,6 +10,11 @@ import torch.nn.functional as F
 
 This script reads plain text, learns to predict the next character, and then
 generates new text from the trained model.
+
+Quick run (from this folder):
+    python train_text_generator.py --data-path ../../data.txt
+
+See --help for all hyperparameters.
 """
 
 
@@ -153,7 +158,17 @@ class TransformerLanguageModel(nn.Module):
 def parse_args() -> argparse.Namespace:
     """Read command-line hyperparameters."""
 
-    parser = argparse.ArgumentParser(description="Train a text-generation transformer with PyTorch")
+    example_text = (
+        "Examples:\n"
+        "  python train_text_generator.py --data-path ../../data.txt\n"
+        "  python train_text_generator.py --max-iters 5000 --save-path checkpoints/model.pt\n"
+        "  python train_text_generator.py --batch-size 32 --block-size 64"
+    )
+    parser = argparse.ArgumentParser(
+        description="Train a text-generation transformer with PyTorch",
+        formatter_class=argparse.RawTextHelpFormatter,
+        epilog=example_text,
+    )
     parser.add_argument("--data-path", type=str, default="../../data.txt", help="Path to training text file")
     parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--block-size", type=int, default=128)

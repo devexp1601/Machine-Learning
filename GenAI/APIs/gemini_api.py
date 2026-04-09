@@ -1,6 +1,8 @@
 import os
 
 import google.generativeai as genai
+from dotenv import load_dotenv
+load_dotenv()  # Load environment variables from .env file
 
 
 def call_gemini(
