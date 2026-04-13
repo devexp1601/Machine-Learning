@@ -2,6 +2,9 @@ import os
 
 from openai import OpenAI
 
+from dotenv import load_dotenv
+load_dotenv()  # Load environment variables from .env file
+
 
 def call_gpt(
     prompt: str,
